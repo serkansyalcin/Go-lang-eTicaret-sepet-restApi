@@ -23,7 +23,9 @@ type Cart struct {
 var products []Product
 var cart Cart
 
-// `main` metodu, HTTP isteklerini yönlendirecek router'ı oluşturur ve HTTP isteklerini belirtilen portta dinlemeye başlar.
+/* `main` metodu, HTTP isteklerini yönlendirecek router'ı oluşturur
+ve HTTP isteklerini belirtilen portta dinlemeye başlar.
+*/
 func main() {
     http.HandleFunc("/products", handleProducts)
     http.HandleFunc("/cart", handleCart)
@@ -53,7 +55,10 @@ func getProducts(w http.ResponseWriter, r *http.Request) {
     json.NewEncoder(w).Encode(products)
 }
 
-// `addProduct` metodu, istek gövdesinden bir ürün nesnesi alır, bu ürünü ürün listesine ekler ve eklenen ürünü yanıt olarak döndürür.
+/* `addProduct` metodu, istek gövdesinden bir ürün nesnesi alır, 
+bu ürünü ürün listesine ekler ve eklenen ürünü yanıt olarak döndürür.
+*/
+
 func addProduct(w http.ResponseWriter, r *http.Request) {
     var product Product
     json.NewDecoder(r.Body).Decode(&product)
@@ -61,7 +66,11 @@ func addProduct(w http.ResponseWriter, r *http.Request) {
     json.NewEncoder(w).Encode(product)
 }
 
-// `updateProduct` metodu, istek gövdesinden bir ürün nesnesi alır ve bu ürünün ID'si ile eşleşen bir ürünü ürün listesinde günceller. Güncellenen ürünü yanıt olarak döndürür. Eşleşen ürün yoksa 404 hata kodu döndürür.
+/*`updateProduct` metodu, istek gövdesinden bir ürün nesnesi alır 
+ve bu ürünün ID'si ile eşleşen bir ürünü ürün listesinde günceller. 
+Güncellenen ürünü yanıt olarak döndürür. Eşleşen ürün yoksa 404 hata kodu döndürür.
+*/
+
 func updateProduct(w http.ResponseWriter, r *http.Request) {
     var product Product
     json.NewDecoder(r.Body).Decode(&product)
@@ -75,7 +84,11 @@ func updateProduct(w http.ResponseWriter, r *http.Request) {
     w.WriteHeader(http.StatusNotFound)
 }
 
-// `deleteProduct` metodu, istek gövdesinden bir ürün nesnesi alır ve bu ürünün ID'si ile eşleşen bir ürünü ürün listesinden siler. Silinen ürünü yanıt olarak döndürür. Eşleşen ürün yoksa 404 hata kodu döndürür.
+/* `deleteProduct` metodu, istek gövdesinden bir ürün nesnesi alır
+ve bu ürünün ID'si ile eşleşen bir ürünü ürün listesinden siler. 
+Silinen ürünü yanıt olarak döndürür. Eşleşen ürün yoksa 404 hata kodu döndürür.
+*/
+
 func deleteProduct(w http.ResponseWriter, r *http.Request) {
     var product Product
     json.NewDecoder(r.Body).Decode(&product)
@@ -109,7 +122,11 @@ func getCart(w http.ResponseWriter, r *http.Request) {
     json.NewEncoder(w).Encode(cart)
 }
 
-// `addToCart` metodu, istek gövdesinden bir sepet öğesi nesnesi alır ve bu öğeyi sepete ekler. Eğer sepet zaten bu üründen içeriyorsa, sepet öğesinin miktarını günceller. Eklenen veya güncellenen öğeyi yanıt olarak döndürür.
+/* `addToCart` metodu, istek gövdesinden bir sepet öğesi nesnesi alır ve bu öğeyi sepete ekler. 
+Eğer sepet zaten bu üründen içeriyorsa, sepet öğesinin miktarını günceller. 
+Eklenen veya güncellenen öğeyi yanıt olarak döndürür.
+*/
+
 func addToCart(w http.ResponseWriter, r *http.Request) {
     var product Product
     json.NewDecoder(r.Body).Decode(&product)
@@ -117,7 +134,11 @@ func addToCart(w http.ResponseWriter, r *http.Request) {
     json.NewEncoder(w).Encode(cart)
 }
 
-// `updateCart` metodu, istek gövdesinden bir sepet öğesi nesnesi alır ve bu öğenin ürünü ile eşleşen bir sepet öğesinin miktarını günceller. Güncellenen öğeyi yanıt olarak döndürür. Eşleşen öğe yoksa 404 hata kodu döndürür.
+/* `updateCart` metodu, istek gövdesinden bir sepet öğesi nesnesi alır 
+ve bu öğenin ürünü ile eşleşen bir sepet öğesinin miktarını günceller. 
+Güncellenen öğeyi yanıt olarak döndürür. Eşleşen öğe yoksa 404 hata kodu döndürür.
+*/
+
 func updateCart(w http.ResponseWriter, r *http.Request) {
     var product Product
     json.NewDecoder(r.Body).Decode(&product)
